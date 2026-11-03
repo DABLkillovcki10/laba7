@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 7 — Галерея-слайдер</title>
+
+    <!-- Подключаем Slick CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+    <style>
+        body {
+            font-family: system-ui, Arial, sans-serif;
+            background: forestgreen;
+            margin: 0;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: white;
+            text-shadow: 1px 1px 2px black;
+            margin-bottom: 2rem;
+        }
+
+        .slider-container {
+            background: #f8f8f8;
+            border: 2px solid black;
+            border-radius: 32px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .my-slider {
+            margin: 0 -10px;
+        }
+
+        .slide-item {
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .slide-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border: 2px solid black;
+            border-radius: 16px;
+            display: block;
+        }
+
+        /* Стилизация точек пейджера под задание (кружочки) */
+        .slick-dots {
+            position: static;
+            margin-top: 1.5rem;
+        }
+
+        .slick-dots li button:before {
+            font-size: 14px;
+            color: #007bff;
+        }
+
+        .slick-dots li.slick-active button:before {
+            color: #0056b3;
+            opacity: 1;
+        }
+
+        /* Стилизация стрелок */
+        .slick-prev, .slick-next {
+            width: 40px;
+            height: 40px;
+            z-index: 10;
+        }
+
+        .slick-prev {
+            left: -50px;
+        }
+
+        .slick-next {
+            right: -50px;
+        }
+
+        .slick-prev:before, .slick-next:before {
+            font-size: 40px;
+            color: #007bff;
+            opacity: 0.7;
+        }
+
+        .slick-prev:hover:before, .slick-next:hover:before {
+            opacity: 1;
+        }
+
+        /* Адаптивность: на мобилках стрелки внутри контейнера */
+        @media (max-width: 768px) {
+            .slick-prev { left: 0; }
+            .slick-next { right: 0; }
+            .slide-item img { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Галерея изображений</h1>
+
+    <div class="slider-container">
+        <div class="my-slider">
+            <div class="slide-item"><img src="https://picsum.photos/id/1015/600/400" alt="Изображение 1"></div>
+            <div class="slide-item"><img src="https://picsum.photos/id/1016/600/400" alt="Изображение 2"></div>
+            <div class="slide-item"><img src="https://picsum.photos/id/1018/600/400" alt="Изображение 3"></div>
+            <div class="slide-item"><img src="https://picsum.photos/id/1019/600/400" alt="Изображение 4"></div>
+            <div class="slide-item"><img src="https://picsum.photos/id/1020/600/400" alt="Изображение 5"></div>
+            <div class="slide-item"><img src="https://picsum.photos/id/1021/600/400" alt="Изображение 6"></div>
+            <div class="slide-item"><img src="https://picsum.photos/id/1022/600/400" alt="Изображение 7"></div>
+            <div class="slide-item"><img src="https://picsum.photos/id/1023/600/400" alt="Изображение 8"></div>
+        </div>
+    </div>
+
+    <!-- Подключаем jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Подключаем Slick JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.my-slider').slick({
+                infinite: true,
+                slidesToShow: 3,     // На десктопе показываем 3 картинки
+                slidesToScroll: 1,   // Листаем по одной
+                dots: true,          // Включаем пейджер (точки)
+                arrows: true,        // Включаем стрелки
+                adaptiveHeight: false,
+                responsive: [
+                    {
+                        breakpoint: 768, // Если экран меньше 768px (смартфоны и планшеты в портрете)
+                        settings: {
+                            slidesToShow: 1, // Показываем 1 картинку
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+
+</body>
+</html>
